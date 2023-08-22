@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Interactive Weather Forecast</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      background-color: #f0f0f0;
+    }
+
+    .forecast-container {
+      background-color: #fff;
+      border-radius: 10px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      padding: 20px;
+      text-align: center;
+    }
+
+    select {
+      padding: 5px;
+      font-size: 16px;
+    }
+  </style>
+</head>
+<body>
+  <div class="forecast-container">
+    <h1>Weather Forecast</h1>
+    <label for="city">Select City:</label>
+    <select id="city">
+      <option value="new-york">New York</option>
+      <option value="los-angeles">Los Angeles</option>
+      <option value="chicago">Chicago</option>
+    </select>
+    <div id="weather-info"></div>
+  </div>
+
+  <script>
+    const weatherData = {
+      'new-york': { temperature: 76, condition: 'Sunny' },
+      'los-angeles': { temperature: 82, condition: 'Clear' },
+      'chicago': { temperature: 68, condition: 'Partly Cloudy' },
+    };
+
+    const citySelect = document.getElementById('city');
+    const weatherInfo = document.getElementById('weather-info');
+
+    citySelect.addEventListener('change', () => {
+      const selectedCity = citySelect.value;
+      const { temperature, condition } = weatherData[selectedCity];
+
+      weatherInfo.innerHTML = `
+        <p>City: ${selectedCity.replace('-', ' ')}</p>
+        <p>Temperature: ${temperature}°F</p>
+        <p>Condition: ${condition}</p>
+      `;
+    });
+  </script>
+</body>
+</html>

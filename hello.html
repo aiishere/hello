@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      background-color: #f0f0f0;
+    }
+
+    .game-container {
+      text-align: center;
+    }
+
+    h1 {
+      font-size: 2rem;
+      margin-bottom: 1rem;
+    }
+
+    button {
+      padding: 0.5rem 1rem;
+      font-size: 1rem;
+      background-color: #3498db;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #2980b9;
+    }
+  </style>
+</head>
+<body>
+  <div class="game-container">
+    <h1>Number Guessing Game</h1>
+    <p>Guess a number between 1 and 100:</p>
+    <input type="number" id="guessInput" min="1" max="100" />
+    <button onclick="checkGuess()">Submit Guess</button>
+    <p id="result"></p>
+  </div>
+
+  <script>
+    const randomNumber = Math.floor(Math.random() * 100) + 1;
+    let guesses = 0;
+
+    function checkGuess() {
+      const guess = parseInt(document.getElementById('guessInput').value);
+      guesses++;
+
+      const resultElement = document.getElementById('result');
+      if (guess === randomNumber) {
+        resultElement.textContent = `Congratulations! You guessed the number ${randomNumber} in ${guesses} guesses.`;
+      } else if (guess < randomNumber) {
+        resultElement.textContent = 'Try a higher number.';
+      } else {
+        resultElement.textContent = 'Try a lower number.';
+      }
+    }
+  </script>
+</body>
+</html>

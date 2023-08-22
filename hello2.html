@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      background-color: #f0f0f0;
+    }
+
+    .game-container {
+      text-align: center;
+    }
+
+    .hole {
+      width: 80px;
+      height: 80px;
+      background-color: #8b572a;
+      border-radius: 50%;
+      position: relative;
+      margin: 10px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    .mole {
+      width: 60px;
+      height: 60px;
+      background-color: #5e3b0e;
+      border-radius: 50%;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <div class="game-container">
+    <h1>Whack-a-Mole Game</h1>
+    <p>Click on the moles to earn points!</p>
+    <p>Score: <span id="score">0</span></p>
+    <div class="hole" onclick="whackMole(this)">
+      <div class="mole"></div>
+    </div>
+  </div>
+
+  <script>
+    let score = 0;
+
+    function whackMole(hole) {
+      const mole = hole.querySelector('.mole');
+      if (!mole.style.display || mole.style.display === 'none') {
+        score++;
+        document.getElementById('score').textContent = score;
+      }
+      mole.style.display = 'none';
+    }
+
+    function randomTime(min, max) {
+      return Math.floor(Math.random() * (max - min + 1)) + min;
+    }
+
+    function showRandomMole() {
+      const holes = document.querySelectorAll('.hole');
+      const randomIndex = Math.floor(Math.random() * holes.length);
+      const randomHole = holes[randomIndex];
+      const mole = randomHole.querySelector('.mole');
+
+      mole.style.display = 'block';
+      setTimeout(() => {
+        mole.style.display = 'none';
+      }, randomTime(1000, 2000));
+
+      setTimeout(showRandomMole, randomTime(1000, 2000));
+    }
+
+    showRandomMole();
+  </script>
+</body>
+</html>
